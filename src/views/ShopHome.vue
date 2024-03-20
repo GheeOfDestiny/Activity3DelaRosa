@@ -36,15 +36,19 @@
       }
     },
     methods: {
-      addToCart(item) {
+      addToCart(item)
+      {
         if (this.isLoggedIn)
         {
           const foundIndex = this.cart.findIndex(
             (cartItem) => cartItem.product.id === item.id
           );
-          if (foundIndex !== -1) {
+          if (foundIndex !== -1)
+          {
             this.cart[foundIndex].quantity++;
-          } else {
+          }
+          else
+          {
             this.cart.push({ product: item, quantity: 1 });
           }
         }
