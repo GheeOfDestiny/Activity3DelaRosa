@@ -36,31 +36,35 @@
       }
     },
     methods: {
-      addToCart(item) {
-        if (this.isLoggedIn) {
+      addToCart(item)
+      {
+        if (this.isLoggedIn)
+        {
           const foundIndex = this.cart.findIndex(
             (cartItem) => cartItem.product.id === item.id
           );
-          if (foundIndex !== -1) {
+          if (foundIndex !== -1)
+          {
             this.cart[foundIndex].quantity++;
-          } else {
+          }
+          else
+          {
             this.cart.push({ product: item, quantity: 1 });
           }
-        } else {
-        // Prompt user to log in
-        const confirmed = window.confirm('Please log in to add items to your cart. Would you like to log in now?');
-    if (confirmed) {
-      // Simulate login action - setting token in local storage
-      localStorage.setItem('token', '12345');
-      // Set isLoggedIn to true upon successful login
-      this.isLoggedIn = true;
-      // Redirect to a designated route
-      this.$router.push({ name: 'shop' }); // Redirecting to the profile page
-      // Prompt user that they are now logged in
-      setTimeout(() => {
-        window.confirm('You are now logged in. You can add items to your cart.');
-      }, 100); // Delay the confirmation dialog to ensure it appears after redirection
-    }
+        }
+        else
+        {
+          const confirmed = window.confirm('Please log in to add items to your cart. Would you like to log in now?');
+          if (confirmed)
+          {
+            localStorage.setItem('token', '12345');
+            this.isLoggedIn = true;
+            this.$router.push({ name: 'shop' });
+            setTimeout(() =>
+            {
+              window.confirm('You are now logged in. You can add items to your cart.');
+            }, 100);
+          }
         }
       }
     }
