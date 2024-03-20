@@ -1,0 +1,69 @@
+<template>
+    <div>
+      <!-- Item Listings -->
+      <div>
+        <h2>Items</h2>
+        <div v-for="item in products" :key="item.id" class="item-container">
+          <div class="item-info">
+            <p>{{ item.name }} - ₱{{ item.price }}</p>
+          </div>
+          <div class="add-to-cart-btn">
+            <button @click="addToCart(item)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        products: [
+          { id: 1, name: 'Item 1', price: 5 },
+          { id: 2, name: 'Item 2', price: 10 },
+          { id: 3, name: 'Item 3', price: 25 }
+        ],
+        cart: [],
+        isLoggedIn: false // Assuming initially the user is not logged in
+      };
+    },
+    computed: {
+      totalPrice() {
+        return this.cart.reduce((total, item) => {
+          return total + item.product.price * item.quantity;
+        }, 0);
+      }
+    },
+    methods: {
+      addToCart(item) {
+        if (this.isLoggedIn) {
+          const foundIndex = this.cart.findIndex(
+            (cartItem) => cartItem.product.id === item.id
+          );
+          if (foundIndex !== -1) {
+            this.cart[foundIndex].quantity++;
+          } else {
+            this.cart.push({ product: item, quantity: 1 });
+          }
+        } else {
+        // Prompt user to log in
+        const confirmed = window.confirm('Please log in to add items to your cart. Would you like to log in now?');
+    if (confirmed) {
+      // Simulate login action - setting token in local storage
+      localStorage.setItem('token', '12345');
+      // Set isLoggedIn to true upon successful login
+      this.isLoggedIn = true;
+      // Redirect to a designated route
+      this.$router.push({ name: 'shop' }); // Redirecting to the profile page
+      // Prompt user that they are now logged in
+      setTimeout(() => {
+        window.confirm('You are now logged in. You can add items to your cart.');
+      }, 100); // Delay the confirmation dialog to ensure it appears after redirection
+    }
+        }
+      }
+    }
+  };
+  </script>
+  
