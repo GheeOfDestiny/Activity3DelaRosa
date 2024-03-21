@@ -72,10 +72,11 @@
           }
         }
       },
-      handleClick() {
-            localStorage.setItem('token', '12345')
-            this.$router.push({ name: 'shop' })
-        }
+      handleClick()
+      {
+        localStorage.setItem('token', '12345')
+        this.$router.push({ name: 'shop' })
+      }
     }
   };
   </script>
