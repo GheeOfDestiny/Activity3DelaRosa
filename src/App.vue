@@ -1,34 +1,35 @@
 <template>
   <nav>
-    <router-link :to="homeLink">Home Page</router-link> |
-    <router-link :to="shopLink" @click="navigateToShop">Shop</router-link>
+    <router-link :to="homeLink" class="nav-link" :class="{ 'button': isHomePage }">Home Page</router-link> |
+    <router-link :to="shopLink" @click="navigateToShop" class="nav-link" :class="{ 'button': isShopPage }">Shop</router-link>
   </nav>
   <router-view/>
 </template>
 
 <script>
 export default {
-  data()
-  {
+  data() {
     return {
       isLoggedIn: false
     };
   },
   computed: {
-    shopLink()
-    {
+    shopLink() {
       return this.isLoggedIn ? '/shop' : '#'; 
     },
-    homeLink()
-    {
+    homeLink() {
       return this.$route.path === '/shop' ? '#' : '/'; 
+    },
+    isHomePage() {
+      return this.$route.path === '/';
+    },
+    isShopPage() {
+      return this.$route.path === '/shop';
     }
   },
   methods: {
-    navigateToShop(event)
-    {
-      if (!this.isLoggedIn)
-      {
+    navigateToShop(event) {
+      if (!this.isLoggedIn) {
         event.preventDefault(); 
         console.log("You need to be logged in to access the Shop.");
       }
@@ -50,12 +51,22 @@ nav {
   padding: 30px;
 }
 
-nav a {
+.nav-link {
   font-weight: bold;
   color: #2c3e50;
+  text-decoration: none;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: orange; /* Change button color to black */
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: black;
 }
 </style>

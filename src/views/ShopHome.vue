@@ -2,6 +2,8 @@
     <div>
       <!-- Item Listings -->
       <div>
+        <span>Log in: </span>
+        <button @click="handleClick">Login</button>
         <h2>Items</h2>
         <div v-for="item in products" :key="item.id" class="item-container">
           <div class="item-info">
@@ -36,6 +38,9 @@
       }
     },
     methods: {
+
+        
+
       addToCart(item)
       {
         if (this.isLoggedIn)
@@ -66,7 +71,11 @@
             }, 100);
           }
         }
-      }
+      },
+      handleClick() {
+            localStorage.setItem('token', '12345')
+            this.$router.push({ name: 'shop' })
+        }
     }
   };
   </script>
