@@ -8,24 +8,28 @@
 
 <script>
 export default {
-  data() {
+  data()
+  {
     return {
       isLoggedIn: false
     };
   },
   computed: {
-    shopLink() {
+    shopLink()
+    {
       return this.isLoggedIn ? '/shop' : '#'; 
     },
-    homeLink() {
-      return this.$route.path === '/shop' ? '#' : '/'; // Make Home Page link not clickable if on Shop page
+    homeLink()
+    {
+      return this.$route.path === '/shop' ? '#' : '/'; 
     }
   },
   methods: {
-    navigateToShop(event) {
-      if (!this.isLoggedIn) {
-        event.preventDefault(); // Prevent default navigation
-        // You can implement your own logic here to handle non-logged-in users, like showing a message or redirecting to the login page
+    navigateToShop(event)
+    {
+      if (!this.isLoggedIn)
+      {
+        event.preventDefault(); 
         console.log("You need to be logged in to access the Shop.");
       }
     }
